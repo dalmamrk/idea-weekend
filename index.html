@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+
+  <!-- Istruzione ai crawler: la pagina non deve comparire nei risultati di ricerca. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <title>Una sorpresa per te</title>
+  <meta name="description" content="Un invito a una pausa tra natura, panorami e relax.">
+  <link rel="icon" type="image/svg+xml" href="assets/tigullio-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f4ef;
+      --paper-deep: #eeece4;
+      --white: #fffefa;
+      --ink: #202923;
+      --muted: #536059;
+      --sage: #53685f;
+      --sage-soft: #e7ebe5;
+      --stone: #d8d2c4;
+      --coral: #c77f68;
+      --line: #d9dcd5;
+      --shadow: 0 24px 70px rgb(32 41 35 / 8%);
+      --font: "Manrope", "Avenir Next", Avenir, sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    ::selection { background: var(--stone); color: var(--ink); }
+
+    .gate-screen {
+      display: grid;
+      min-height: 100vh;
+      min-height: 100svh;
+      grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+      background: var(--paper);
+    }
+    .gate-art {
+      position: relative;
+      display: flex;
+      min-height: 100vh;
+      min-height: 100svh;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: clamp(1.5rem, 4.5vw, 4.5rem);
+      background: #53685f;
+      color: var(--white);
+      isolation: isolate;
+    }
+    .gate-art::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(180deg, rgb(24 35 30 / 16%), rgb(24 35 30 / 44%));
+      content: "";
+    }
+    .gate-illustration { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+    .gate-art-label { display: inline-flex; align-items: center; gap: .7rem; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .gate-art-label::before { width: 26px; height: 1px; background: var(--coral); content: ""; }
+    .gate-art-copy { max-width: 410px; margin: 0; font-size: clamp(1.65rem, 3.2vw, 2.8rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.16; }
+    .gate-side { display: grid; min-height: 100vh; min-height: 100svh; place-items: center; padding: clamp(2rem, 5vw, 5rem); }
+    .gate-card { width: min(100%, 430px); }
+    .gate-kicker { margin: 0 0 .85rem; color: var(--sage); font-size: .72rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .gate-title { max-width: 420px; margin: 0 0 1rem; font-size: clamp(2.3rem, 4.3vw, 3.55rem); font-weight: 600; letter-spacing: -.07em; line-height: 1.03; }
+    .gate-copy { margin: 0 0 1.8rem; color: var(--muted); font-size: .97rem; line-height: 1.75; }
+    .gate-form { display: grid; gap: .72rem; }
+    .gate-label { color: var(--ink); font-size: .78rem; font-weight: 800; }
+    .gate-input { width: 100%; min-height: 56px; padding: .85rem 1rem; border: 1px solid #cbd1c9; border-radius: 12px; background: var(--white); color: var(--ink); font: inherit; }
+    .gate-input::placeholder { color: #7b857e; }
+    .gate-input[aria-invalid="true"] { border-color: #a65d4d; }
+    .gate-error { margin: .1rem 0; color: #8f493c; font-size: .83rem; }
+    .gate-button { width: 100%; margin-top: .4rem; background: var(--sage); color: var(--white); cursor: pointer; font: inherit; }
+    .gate-button:hover { background: #43564d; }
+    .gate-footnote { margin: 1.2rem 0 0; color: var(--muted); font-size: .76rem; }
+    .gate-noscript { margin-top: 1rem; color: #8f493c; font-size: .85rem; }
+
+    .skip-link {
+      position: absolute;
+      z-index: 20;
+      top: 1rem;
+      left: 1rem;
+      transform: translateY(-160%);
+      padding: .7rem 1rem;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: min(790px, 88svh);
+      min-height: min(790px, 88vh);
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      background: #53645d;
+      color: #fffefa;
+    }
+
+    .hero-image,
+    .hero-shade {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-image { object-fit: cover; object-position: center 48%; }
+    .hero-shade {
+      background:
+        linear-gradient(90deg, rgb(18 29 25 / 76%) 0%, rgb(24 35 30 / 55%) 44%, rgb(24 35 30 / 13%) 100%),
+        linear-gradient(0deg, rgb(18 29 25 / 35%) 0%, transparent 38%);
+    }
+
+    .topbar {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.6rem clamp(1.25rem, 5vw, 5rem);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: #fffefa;
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: -.035em;
+      text-decoration: none;
+    }
+    .brand svg { width: 34px; height: 34px; flex: 0 0 auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 2.5rem);
+    }
+    .nav-links a {
+      color: #fffefa;
+      font-size: .84rem;
+      font-weight: 700;
+      text-decoration: none;
+      text-underline-offset: .35rem;
+    }
+    .nav-links a:hover { text-decoration: underline; }
+
+    .hero-copy {
+      width: min(100% - 2.5rem, 1160px);
+      margin: 6rem auto 5rem;
+      padding-bottom: 1.2rem;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      margin: 0 0 1.1rem;
+      color: #e5e8df;
+      font-size: .73rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 30px;
+      height: 1px;
+      background: var(--coral);
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin-bottom: 1.3rem;
+      font-size: clamp(3.4rem, 8.2vw, 7.4rem);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: .99;
+    }
+    h1 span { color: #e5e6da; font-weight: 400; }
+    .hero-intro {
+      max-width: 540px;
+      margin-bottom: 2rem;
+      color: #f1f1eb;
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.75;
+    }
+    .hero-recipient {
+      margin: -0.65rem 0 1.1rem;
+      color: #e5e6da;
+      font-size: clamp(1rem, 1.8vw, 1.28rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      padding: .75rem 1.25rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: #f5f4ef;
+      color: var(--ink);
+      font-size: .88rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s ease, background-color .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); background: #fffefa; }
+    .button svg { width: 16px; height: 16px; }
+
+    .photo-credit {
+      position: absolute;
+      right: clamp(1rem, 3vw, 2.5rem);
+      bottom: 1.1rem;
+      color: #fffefa;
+      font-size: .68rem;
+      text-align: right;
+      text-shadow: 0 1px 8px rgb(0 0 0 / 60%);
+    }
+    .photo-credit a { text-underline-offset: .2rem; }
+
+    .wrap { width: min(100% - 2.5rem, 1040px); margin-inline: auto; }
+    .facts {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: -3rem;
+      overflow: hidden;
+      border: 1px solid rgb(32 41 35 / 5%);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .fact {
+      min-height: 130px;
+      padding: 1.55rem 1.7rem;
+    }
+    .fact + .fact { border-left: 1px solid var(--line); }
+    .fact-label {
+      display: block;
+      margin-bottom: .45rem;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .fact strong {
+      display: block;
+      color: var(--sage);
+      font-size: clamp(1.05rem, 2vw, 1.38rem);
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.25;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 7.5rem auto 5.2rem;
+      text-align: center;
+    }
+    .section-kicker {
+      margin: 0 0 .8rem;
+      color: var(--sage);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .intro h2,
+    .day-heading h2 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.2rem, 5vw, 3.7rem);
+      font-weight: 600;
+      letter-spacing: -.065em;
+      line-height: 1.08;
+    }
+    .intro p:last-child { margin-bottom: 0; color: var(--muted); }
+
+    .day-section { padding-block: 1.25rem 6.5rem; }
+    .day-heading {
+      display: grid;
+      grid-template-columns: 1fr minmax(210px, 360px);
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: 2.4rem;
+    }
+    .day-number {
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: var(--coral);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .day-heading h2 { margin-bottom: 0; }
+    .day-summary { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .timeline {
+      position: relative;
+      margin-left: .45rem;
+      padding: .2rem 0 .2rem 2.1rem;
+      border-left: 1px solid #c8cec6;
+    }
+    .event { position: relative; margin-bottom: 2.9rem; }
+    .event:last-child { margin-bottom: .2rem; }
+    .event::before {
+      position: absolute;
+      top: .42rem;
+      left: -2.48rem;
+      width: 12px;
+      height: 12px;
+      border: 3px solid var(--paper);
+      border-radius: 50%;
+      background: var(--sage);
+      box-shadow: 0 0 0 1px var(--sage);
+      content: "";
+    }
+    .event-time {
+      margin: 0 0 .35rem;
+      color: var(--sage);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .event h3 {
+      margin-bottom: .6rem;
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 700;
+      letter-spacing: -.045em;
+      line-height: 1.25;
+    }
+    .event p { max-width: 720px; margin-bottom: .8rem; color: var(--muted); }
+    .places {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem 1.5rem;
+      margin: 1.2rem 0 1.4rem;
+      padding: 0;
+      list-style: none;
+    }
+    .places li {
+      position: relative;
+      padding: .12rem 0 .12rem 1.3rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .places li::before {
+      position: absolute;
+      top: .69rem;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+      content: "";
+    }
+    .places strong { color: var(--ink); }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--sage);
+      font-size: .87rem;
+      font-weight: 800;
+      text-decoration-thickness: 1px;
+      text-underline-offset: .25rem;
+    }
+    .text-link svg { width: 15px; height: 15px; }
+
+    .flex-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      margin: 3.8rem 0 0;
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      border: 1px solid #d5ded4;
+      border-radius: 18px;
+      background: var(--sage-soft);
+    }
+    .flex-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--sage);
+    }
+    .flex-icon svg { width: 24px; height: 24px; }
+    .flex-card h3 { margin: 0 0 .55rem; font-size: 1.3rem; letter-spacing: -.04em; }
+    .flex-card p { margin: 0; color: #3f4d45; font-size: .93rem; }
+    .flex-card p + p { margin-top: .65rem; }
+    .flex-card strong { color: var(--ink); }
+    .practical-note {
+      margin: .8rem 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .map-section {
+      margin: 3.5rem 0 0;
+      padding: clamp(1.25rem, 3.5vw, 2rem);
+      border: 1px solid rgb(32 41 35 / 5%);
+      border-radius: 18px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .map-section h3 {
+      margin: 0 0 .65rem;
+      font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+      letter-spacing: -.045em;
+    }
+    .map-intro { margin: 0 0 1.2rem; color: var(--muted); font-size: .92rem; }
+    .map-frame-wrap { max-width: 760px; margin-inline: auto; overflow: hidden; border-radius: 12px; background: var(--paper-deep); }
+    .map-frame { display: block; width: 100%; height: auto; min-height: 300px; max-height: 480px; aspect-ratio: 4 / 3; border: 0; }
+    .map-fallback { margin: 1rem 0 0; color: var(--muted); font-size: .82rem; text-align: center; }
+    .map-fallback a { color: var(--sage); font-weight: 800; text-underline-offset: .2rem; }
+
+    .route-gallery { display: grid; gap: 1.2rem; margin: 3.5rem 0; }
+    .route-gallery-heading { margin-bottom: .3rem; }
+    .route-gallery-heading h3 { margin: 0 0 .55rem; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.05em; }
+    .route-gallery-heading p:last-child { margin: 0; color: var(--muted); font-size: .92rem; }
+    .route-photo { width: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: var(--white); box-shadow: var(--shadow); }
+    .route-photo--rapallo { max-width: 780px; }
+    .route-photo img { display: block; width: 100%; height: auto; object-fit: cover; }
+    .route-photo--rapallo img { aspect-ratio: 3 / 2; object-position: center 55%; }
+    .route-photo--zoagli img { aspect-ratio: 7 / 1; object-position: center; }
+    .route-caption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .35rem 1rem; padding: .85rem 1rem; }
+    .route-caption-title { color: var(--ink); font-size: .88rem; font-weight: 800; }
+    .route-credit { color: var(--muted); font-size: .7rem; }
+    .route-credit a { color: var(--sage); text-underline-offset: .18rem; }
+
+    .sunday {
+      position: relative;
+      margin: 0 calc((100vw - min(100vw - 2.5rem, 1040px)) / -2);
+      padding: 5.5rem max(1.25rem, calc((100vw - min(100vw - 2.5rem, 1040px)) / 2)) 5.8rem;
+      background: var(--paper-deep);
+    }
+    .sunday-inner { width: 100%; max-width: 1040px; margin-inline: auto; }
+    .sunday .timeline { border-color: #c9c9bd; }
+    .sunday .event::before { border-color: var(--paper-deep); }
+    .sunday .event:last-child { margin-bottom: 0; }
+
+    .closing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-block: 5rem 5.5rem;
+      padding: clamp(1.5rem, 4vw, 2.8rem);
+      border-radius: 18px;
+      background: var(--sage);
+      color: var(--white);
+    }
+    .closing p { max-width: 530px; margin: 0; color: #f0f2ed; }
+    .closing .section-kicker { color: #e1e8df; }
+    .closing h2 { margin: 0 0 .55rem; font-size: clamp(1.6rem, 3.5vw, 2.5rem); letter-spacing: -.06em; }
+    .closing .button { flex: 0 0 auto; background: var(--white); }
+
+    footer {
+      padding: 2rem 1.25rem 2.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+    }
+    footer p { margin: 0; }
+    footer a { color: var(--sage); }
+
+    @media (max-width: 860px) {
+      .gate-screen { grid-template-columns: minmax(0, 1fr); }
+      .gate-art { min-height: 250px; max-height: 340px; padding: 1.4rem 1.25rem; }
+      .gate-art-copy { max-width: 330px; font-size: clamp(1.45rem, 6vw, 1.9rem); }
+      .gate-side { min-height: auto; padding: 2.6rem 1.25rem 3rem; }
+    }
+
+    @media (max-width: 720px) {
+      .hero { min-height: 740px; min-height: min(760px, 92svh); }
+      .hero-image { object-position: 58% center; }
+      .hero-shade {
+        background:
+          linear-gradient(90deg, rgb(18 29 25 / 70%) 0%, rgb(24 35 30 / 40%) 100%),
+          linear-gradient(0deg, rgb(18 29 25 / 45%) 0%, transparent 55%);
+      }
+      .topbar { align-items: flex-start; padding-top: 1.2rem; }
+      .brand { font-size: .84rem; }
+      .brand svg { width: 30px; height: 30px; }
+      .nav-links { gap: .9rem; padding-top: .3rem; }
+      .nav-links a { font-size: .77rem; }
+      .hero-copy { width: min(100% - 2.5rem, 560px); margin-top: 6rem; margin-bottom: 5.8rem; }
+      h1 { font-size: clamp(3.35rem, 13vw, 5.6rem); }
+      .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: -2.3rem; }
+      .fact { min-height: 110px; padding: 1.2rem; }
+      .fact:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+      .fact:nth-child(4) { border-top: 1px solid var(--line); }
+      .intro { margin: 5.5rem auto 4.4rem; }
+      .day-heading { grid-template-columns: 1fr; gap: .8rem; }
+      .places { grid-template-columns: 1fr; gap: .45rem; }
+      .flex-card { grid-template-columns: 1fr; }
+      .route-gallery { gap: .9rem; margin: 2.5rem 0; }
+      .route-photo--rapallo img { aspect-ratio: 4 / 3; }
+      .route-photo--zoagli img { aspect-ratio: 4 / 1; }
+      .route-caption { align-items: flex-start; flex-direction: column; }
+      .sunday { margin-inline: -1.25rem; padding: 4rem 1.25rem; }
+      .closing { align-items: flex-start; flex-direction: column; margin-block: 3.5rem 4rem; }
+    }
+
+    @media (max-width: 420px) {
+      .topbar { gap: .6rem; }
+      .brand { gap: .45rem; }
+      .nav-links { gap: .65rem; }
+      .nav-links a { font-size: .72rem; }
+      .hero-copy { margin-top: 5rem; }
+      .photo-credit { max-width: 260px; font-size: .61rem; }
+      .fact { padding: 1rem; }
+      .fact strong { font-size: 1.02rem; }
+      .timeline { padding-left: 1.65rem; }
+      .event::before { left: -2.04rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <section class="gate-screen" id="password-gate" aria-labelledby="gate-title">
+    <div class="gate-art">
+      <img class="gate-illustration" src="assets/ingresso-astratto.svg" alt="">
+      <span class="gate-art-label">Una proposta per te</span>
+      <p class="gate-art-copy">Una parola, e si apre una piccola fuga.</p>
+    </div>
+    <div class="gate-side">
+      <div class="gate-card">
+        <h1 class="gate-title" id="gate-title">Ti aspetta una piccola fuga.</h1>
+        <p class="gate-copy">Se ti va di trascorrere un weekend tra panorami mozzafiato, natura e relax, scrivi il tuo nome nel campo password.</p>
+        <form class="gate-form" id="gate-form">
+          <label class="gate-label" for="gate-password">Password</label>
+          <input class="gate-input" id="gate-password" name="password" type="password" placeholder="Il tuo nome" autocomplete="off" spellcheck="false" aria-describedby="gate-error" required>
+          <p class="gate-error" id="gate-error" role="alert" hidden>Quasi! Riprova con il nome giusto.</p>
+          <button class="button gate-button" type="submit">Apri la proposta</button>
+        </form>
+        <noscript><p class="gate-noscript">Per aprire la sorpresa, attiva JavaScript nel browser.</p></noscript>
+      </div>
+    </div>
+  </section>
+
+  <div id="weekend-content" hidden>
+  <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+
+  <header class="hero" id="inizio">
+    <img class="hero-image" src="assets/santa-margherita.jpg" alt="Veduta del porto e della costa di Santa Margherita Ligure" fetchpriority="high">
+    <div class="hero-shade" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <a class="brand" href="#inizio" aria-label="Weekend nel Tigullio — torna all'inizio">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="29" cy="10" r="4" fill="#C77F68"/>
+          <path d="M3.5 28.5 14.8 15l6.1 7 4.1-4.1 11.5 13.6H3.5Z" fill="#E7EBE5"/>
+          <path d="M7 29.5c6-1 7.1-6.1 12.5-6.1 3.9 0 5.4 3.1 9.5 3.1 2.2 0 4.1-.8 6-2.1" stroke="#53685F" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span>Weekend nel Tigullio</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="#sabato">Sabato</a>
+        <a href="#domenica">Domenica</a>
+      </nav>
+    </div>
+
+    <div class="hero-copy">
+      <p class="eyebrow">Un fine settimana per due</p>
+      <h1>Tra il blu<br><span>e i sentieri.</span></h1>
+      <p class="hero-recipient">Una proposta per Francesca</p>
+      <p class="hero-intro">Una giornata a piedi tra i borghi del Tigullio, poi il lusso di una domenica senza fretta. Il resto lo decide il vostro passo.</p>
+      <a class="button" href="#sabato">
+        Scopri il programma
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <p class="photo-credit">Foto: <a href="https://commons.wikimedia.org/wiki/File:Santa_Margherita_Ligure.jpg" target="_blank" rel="noopener noreferrer">Andrzej Otrębski · CC BY-SA 3.0</a>, Wikimedia Commons</p>
+  </header>
+
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <section class="facts" aria-label="Dati del trekking">
+      <div class="fact"><span class="fact-label">Distanza</span><strong>16–18 km</strong></div>
+      <div class="fact"><span class="fact-label">In cammino</span><strong>5–6 ore</strong></div>
+      <div class="fact"><span class="fact-label">Impegno</span><strong>Impegnativo</strong></div>
+      <div class="fact"><span class="fact-label">Terreno</span><strong>Saliscendi costieri</strong></div>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <p class="section-kicker">Il piano del weekend</p>
+      <h2 id="intro-title">Due giorni, un ritmo tutto vostro.</h2>
+      <p>Il sabato si conquista il panorama passo dopo passo. La domenica si lascia spazio al mare, ai caruggi e a un buon pranzo ligure.</p>
+    </section>
+
+    <section class="day-section" id="sabato" aria-labelledby="sabato-title">
+      <div class="day-heading">
+        <div>
+          <span class="day-number">Giorno 01 · Sabato</span>
+          <h2 id="sabato-title">Il sentiero chiama.</h2>
+        </div>
+        <p class="day-summary">Dal porto di Santa Margherita fino a Chiavari, lungo la tappa 5 del Cammino nel Tigullio.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="event">
+          <p class="event-time">08:30 · Santa Margherita Ligure</p>
+          <h3>Arrivo e preparativi</h3>
+          <p>Colazione, sistemazione e un momento per preparare lo zaino prima di mettersi in cammino.</p>
+        </article>
+
+        <article class="event">
+          <p class="event-time">09:15 · Tappa 5</p>
+          <h3>Una costa, tanti scorci</h3>
+          <p>Mulattiere, sentieri e brevi tratti asfaltati accompagnano il percorso tra borghi di mare e salite panoramiche.</p>
+          <ul class="places">
+            <li><strong>San Michele di Pagana</strong> — sosta alla chiesa per ammirare la Crocifissione di Van Dyck.</li>
+            <li><strong>Rapallo</strong> — passeggiata a mare e sguardo al Castello sul lungomare.</li>
+            <li><strong>Sant’Ambrogio e San Pantaleo</strong> — la salita che apre le vedute più ampie sul golfo.</li>
+            <li><strong>Zoagli</strong> — discesa al borgo: una buona pausa pranzo vista mare.</li>
+            <li><strong>San Pietro di Rovereto</strong> — l’ultima salita verso il Santuario delle Grazie.</li>
+          </ul>
+          <a class="text-link" href="https://tigulliotrekking.it/tappa-5-cammino-nel-tigullio/" target="_blank" rel="noopener noreferrer">
+            Mappa e dettagli ufficiali
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M11 4h5v5m-.5-4.5-7 7M14 11v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <article class="event">
+          <p class="event-time">Tardo pomeriggio · Chiavari</p>
+          <h3>Traguardo sotto i portici</h3>
+          <p>La tappa si chiude tra i portici storici di Chiavari. Da qui, rientro in treno a Santa Margherita e meritato riposo.</p>
+        </article>
+      </div>
+
+      <section class="route-gallery" aria-labelledby="route-gallery-title">
+        <div class="route-gallery-heading">
+          <p class="section-kicker">Lungo la costa</p>
+          <h3 id="route-gallery-title">Il percorso, in due scorci.</h3>
+          <p>Dal Castello di Rapallo al panorama di Zoagli, due tappe da assaporare anche con gli occhi.</p>
+        </div>
+        <figure class="route-photo route-photo--rapallo">
+          <img src="assets/rapallo-castello.jpg" alt="Il Castello di Rapallo affacciato sul mare e sul porto" width="1280" height="848" loading="lazy" decoding="async">
+          <figcaption class="route-caption">
+            <span class="route-caption-title">Rapallo · il Castello sul mare</span>
+            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Rapallo-castello_sul_mare_(2015).jpg" target="_blank" rel="noopener noreferrer">Dapa19</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · ridimensionata</span>
+          </figcaption>
+        </figure>
+        <figure class="route-photo route-photo--zoagli">
+          <img src="assets/zoagli-panorama.jpg" alt="Veduta panoramica di Zoagli, con il borgo costiero affacciato sul golfo" width="1920" height="274" loading="lazy" decoding="async">
+          <figcaption class="route-caption">
+            <span class="route-caption-title">Zoagli · il borgo e la costa</span>
+            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Wv_Zoagli_banner.jpg" target="_blank" rel="noopener noreferrer">patano</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> · ridimensionata</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="map-section" aria-labelledby="map-title">
+        <p class="section-kicker">Il percorso, a colpo d’occhio</p>
+        <h3 id="map-title">Segui il cammino sulla mappa.</h3>
+        <p class="map-intro">Esplora la traccia della tappa 5 e orientati tra i borghi del Tigullio.</p>
+        <div class="map-frame-wrap">
+          <iframe
+            class="map-frame"
+            src="https://www.google.com/maps/d/embed?mid=1MDQTKp8nY89GBpYG0KNnUVzpKz2GmC8&amp;ehbc=2E312F"
+            title="Mappa interattiva del trekking della tappa 5 nel Tigullio"
+            width="640"
+            height="480"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <p class="map-fallback">Se la mappa non si carica, <a href="https://www.google.com/maps/d/embed?mid=1MDQTKp8nY89GBpYG0KNnUVzpKz2GmC8&amp;ehbc=2E312F" target="_blank" rel="noopener noreferrer">aprila direttamente in Google Maps</a>.</p>
+      </section>
+
+      <aside class="flex-card" aria-labelledby="flessibilita-title">
+        <div class="flex-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 18.5 9 14l3.4 2.1L20 8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.8 8H20v4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <p class="section-kicker">Piano flessibile</p>
+          <h3 id="flessibilita-title">Il bello è poter cambiare idea.</h3>
+          <p>Non serve arrivare per forza a Chiavari: <strong>Rapallo</strong> permette di accorciare la camminata; da <strong>Zoagli</strong> si può rientrare dopo la parte più panoramica e il pranzo sul mare, evitando la salita finale.</p>
+          <p class="practical-note">Prima di partire, controllate orari ferroviari e condizioni aggiornate del sentiero.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="sunday" id="domenica" aria-labelledby="domenica-title">
+      <div class="sunday-inner">
+        <div class="day-heading">
+          <div>
+            <span class="day-number">Giorno 02 · Domenica</span>
+            <h2 id="domenica-title">Il tempo si allarga.</h2>
+          </div>
+          <p class="day-summary">Niente sveglia di corsa: solo il borgo, il mare e una tavola ligure.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="event">
+            <p class="event-time">Mattina · Santa Margherita</p>
+            <h3>Un risveglio lento</h3>
+            <p>Passeggiata tra i caruggi, visita a Villa Durazzo oppure un caffè con vista sul porto turistico.</p>
+          </article>
+          <article class="event">
+            <p class="event-time">Pranzo</p>
+            <h3>Un ultimo assaggio di Liguria</h3>
+            <p>Una pausa senza fretta per godersi i sapori locali prima di rimettersi in viaggio.</p>
+          </article>
+          <article class="event">
+            <p class="event-time">Pomeriggio</p>
+            <h3>Si torna verso casa</h3>
+            <p>Partenza in auto e rientro in provincia di Cuneo, con il mare ancora negli occhi.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <div>
+        <p class="section-kicker">Tutto pronto, senza fretta</p>
+        <h2 id="closing-title">Il passo giusto è il vostro.</h2>
+        <p>Un’idea di weekend da tenere leggera: si parte insieme, e si sceglie strada facendo quanto lontano arrivare.</p>
+      </div>
+      <a class="button" href="#inizio">Torna all’inizio</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Un piccolo itinerario per due · Percorso e informazioni trekking: <a href="https://tigulliotrekking.it/tappa-5-cammino-nel-tigullio/" target="_blank" rel="noopener noreferrer">Tigullio Trekking</a>.</p>
+  </footer>
+  </div>
+  <script>
+    (() => {
+      const acceptedPasswords = new Set(["Francesca", "francesca", "FRANCESCA"]);
+      const form = document.getElementById("gate-form");
+      const input = document.getElementById("gate-password");
+      const error = document.getElementById("gate-error");
+      const gate = document.getElementById("password-gate");
+      const content = document.getElementById("weekend-content");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!acceptedPasswords.has(input.value)) {
+          error.hidden = false;
+          input.setAttribute("aria-invalid", "true");
+          input.focus();
+          return;
+        }
+
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+        gate.hidden = true;
+        content.hidden = false;
+        document.title = "Weekend nel Tigullio — Sentieri e lentezza";
+        document.querySelector('meta[name="description"]').content = "Un fine settimana per due nel Tigullio, tra trekking panoramico e una domenica senza fretta.";
+        document.getElementById("contenuto").focus({ preventScroll: true });
+      });
+
+      input.addEventListener("input", () => {
+        error.hidden = true;
+        input.removeAttribute("aria-invalid");
+      });
+    })();
+  </script>
+</body>
+</html>
