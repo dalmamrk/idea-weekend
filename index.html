@@ -11,8 +11,23 @@
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <title>Una sorpresa per te</title>
+  <title>Idea di weekend sport & relax</title>
   <meta name="description" content="Un invito a una pausa tra natura, panorami e relax.">
+
+  <!-- Open Graph / WhatsApp preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dalmamrk.github.io/tigullio/">
+  <meta property="og:title" content="Idea di weekend sport & relax">
+  <meta property="og:description" content="Un invito a una pausa tra natura, panorami e relax.">
+  <meta property="og:image" content="https://dalmamrk.github.io/tigullio/assets/santa-margherita.jpg">
+  <meta property="og:site_name" content="Idea di weekend sport & relax">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Idea di weekend sport & relax">
+  <meta name="twitter:description" content="Un invito a una pausa tra natura, panorami e relax.">
+  <meta name="twitter:image" content="https://dalmamrk.github.io/tigullio/assets/santa-margherita.jpg">
+
   <link rel="icon" type="image/svg+xml" href="assets/tigullio-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -101,10 +116,44 @@
     .gate-input { width: 100%; min-height: 56px; padding: .85rem 1rem; border: 1px solid #cbd1c9; border-radius: 12px; background: var(--white); color: var(--ink); font: inherit; }
     .gate-input::placeholder { color: #7b857e; }
     .gate-input[aria-invalid="true"] { border-color: #a65d4d; }
-    .gate-error { margin: .1rem 0; color: #8f493c; font-size: .83rem; }
-    .gate-button { width: 100%; margin-top: .4rem; background: var(--sage); color: var(--white); cursor: pointer; font: inherit; }
-    .gate-button:hover { background: #43564d; }
-    .gate-footnote { margin: 1.2rem 0 0; color: var(--muted); font-size: .76rem; }
+    .button.gate-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      width: 100%;
+      min-height: 52px;
+      margin-top: .5rem;
+      padding: .85rem 1.4rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--sage);
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgb(32 41 35 / 16%);
+      transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
+    }
+    .button.gate-button:hover {
+      background: #43564d;
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgb(32 41 35 / 24%);
+    }
+    .button.gate-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgb(32 41 35 / 14%);
+    }
+    .button.gate-button svg {
+      width: 18px;
+      height: 18px;
+      transition: transform .2s ease;
+    }
+    .button.gate-button:hover svg {
+      transform: translateX(3px);
+    }
     .gate-noscript { margin-top: 1rem; color: #8f493c; font-size: .85rem; }
 
     .skip-link {
@@ -145,8 +194,8 @@
     .hero-image { object-fit: cover; object-position: center 48%; }
     .hero-shade {
       background:
-        linear-gradient(90deg, rgb(18 29 25 / 76%) 0%, rgb(24 35 30 / 55%) 44%, rgb(24 35 30 / 13%) 100%),
-        linear-gradient(0deg, rgb(18 29 25 / 35%) 0%, transparent 38%);
+        linear-gradient(90deg, rgb(14 24 19 / 75%) 0%, rgb(18 29 25 / 48%) 50%, rgb(24 35 30 / 10%) 100%),
+        linear-gradient(0deg, rgb(14 24 19 / 35%) 0%, transparent 40%);
     }
 
     .topbar {
@@ -158,8 +207,8 @@
       width: 100%;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      padding: 1.6rem clamp(1.25rem, 5vw, 5rem);
+      gap: 1rem;
+      padding: 1.5rem clamp(1rem, 4vw, 4rem);
     }
 
     .brand {
@@ -171,27 +220,67 @@
       font-weight: 800;
       letter-spacing: -.035em;
       text-decoration: none;
+      min-width: 0;
     }
     .brand svg { width: 34px; height: 34px; flex: 0 0 auto; }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: clamp(1rem, 3vw, 2.5rem);
+      gap: .55rem;
+      flex-shrink: 0;
     }
     .nav-links a {
-      color: #fffefa;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: .42rem 1rem;
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
       font-size: .84rem;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: -.01em;
       text-decoration: none;
-      text-underline-offset: .35rem;
+      box-shadow: 0 3px 12px rgb(0 0 0 / 25%);
+      border: 1px solid rgb(255 255 255 / 60%);
+      transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+      touch-action: manipulation;
+      white-space: nowrap;
     }
-    .nav-links a:hover { text-decoration: underline; }
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: #eeece4;
+      color: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 16px rgb(0 0 0 / 30%);
+    }
+    .nav-links a:active {
+      transform: translateY(0);
+      background: #e2ded4;
+    }
 
     .hero-copy {
+      position: relative;
+      z-index: 2;
       width: min(100% - 2.5rem, 1160px);
       margin: 6rem auto 5rem;
       padding-bottom: 1.2rem;
+    }
+
+    .hero-copy-blur {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 820px;
+      padding: clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.4rem, 3vw, 2.6rem);
+      margin-left: clamp(-1.4rem, -3vw, -2.6rem);
+      border-radius: 28px;
+      background: rgb(14 24 19 / 42%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 45px rgb(0 0 0 / 28%);
     }
     .eyebrow {
       display: flex;
@@ -203,6 +292,7 @@
       font-weight: 800;
       letter-spacing: .16em;
       text-transform: uppercase;
+      text-shadow: 0 2px 10px rgb(0 0 0 / 60%);
     }
     .eyebrow::before {
       width: 30px;
@@ -218,14 +308,16 @@
       font-weight: 600;
       letter-spacing: -.075em;
       line-height: .99;
+      text-shadow: 0 4px 28px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%);
     }
-    h1 span { color: #e5e6da; font-weight: 400; }
+    h1 span { color: #f0f2eb; font-weight: 400; }
     .hero-intro {
       max-width: 540px;
       margin-bottom: 2rem;
-      color: #f1f1eb;
+      color: #f7f8f4;
       font-size: clamp(1rem, 1.7vw, 1.18rem);
       line-height: 1.75;
+      text-shadow: 0 2px 14px rgb(0 0 0 / 65%);
     }
     .hero-recipient {
       margin: -0.65rem 0 1.1rem;
@@ -299,6 +391,15 @@
       font-weight: 800;
       letter-spacing: -.045em;
       line-height: 1.25;
+    }
+    .fact-note {
+      display: block;
+      margin-top: .4rem;
+      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: normal;
     }
 
     .intro {
@@ -468,14 +569,16 @@
     .map-fallback a { color: var(--sage); font-weight: 800; text-underline-offset: .2rem; }
 
     .route-gallery { display: grid; gap: 1.2rem; margin: 3.5rem 0; }
+    .route-gallery + .route-gallery { margin-top: -1.2rem; }
     .route-gallery-heading { margin-bottom: .3rem; }
     .route-gallery-heading h3 { margin: 0 0 .55rem; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -.05em; }
     .route-gallery-heading p:last-child { margin: 0; color: var(--muted); font-size: .92rem; }
     .route-photo { width: 100%; margin: 0; overflow: hidden; border-radius: 16px; background: var(--white); box-shadow: var(--shadow); }
-    .route-photo--rapallo { max-width: 780px; }
-    .route-photo img { display: block; width: 100%; height: auto; object-fit: cover; }
-    .route-photo--rapallo img { aspect-ratio: 3 / 2; object-position: center 55%; }
-    .route-photo--zoagli img { aspect-ratio: 7 / 1; object-position: center; }
+    .route-photo img { display: block; width: 100%; aspect-ratio: 2.3 / 1; height: auto; object-fit: cover; }
+    .route-photo--rapallo img { object-position: center 48%; }
+    .route-photo--zoagli img { object-position: center; }
+    .route-photo--dallalto img { object-position: center; }
+    .route-photo--passaggi img { object-position: center; }
     .route-caption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .35rem 1rem; padding: .85rem 1rem; }
     .route-caption-title { color: var(--ink); font-size: .88rem; font-weight: 800; }
     .route-credit { color: var(--muted); font-size: .7rem; }
@@ -520,8 +623,7 @@
 
     @media (max-width: 860px) {
       .gate-screen { grid-template-columns: minmax(0, 1fr); }
-      .gate-art { min-height: 250px; max-height: 340px; padding: 1.4rem 1.25rem; }
-      .gate-art-copy { max-width: 330px; font-size: clamp(1.45rem, 6vw, 1.9rem); }
+      .gate-art { min-height: 200px; max-height: 260px; padding: 1.4rem 1.25rem; }
       .gate-side { min-height: auto; padding: 2.6rem 1.25rem 3rem; }
     }
 
@@ -530,41 +632,94 @@
       .hero-image { object-position: 58% center; }
       .hero-shade {
         background:
-          linear-gradient(90deg, rgb(18 29 25 / 70%) 0%, rgb(24 35 30 / 40%) 100%),
-          linear-gradient(0deg, rgb(18 29 25 / 45%) 0%, transparent 55%);
+          linear-gradient(90deg, rgb(14 24 19 / 72%) 0%, rgb(18 29 25 / 42%) 100%),
+          linear-gradient(0deg, rgb(14 24 19 / 35%) 0%, transparent 55%);
       }
-      .topbar { align-items: flex-start; padding-top: 1.2rem; }
-      .brand { font-size: .84rem; }
-      .brand svg { width: 30px; height: 30px; }
-      .nav-links { gap: .9rem; padding-top: .3rem; }
-      .nav-links a { font-size: .77rem; }
-      .hero-copy { width: min(100% - 2.5rem, 560px); margin-top: 6rem; margin-bottom: 5.8rem; }
+      .topbar {
+        align-items: center;
+        padding: 1rem 1rem 0;
+        gap: .5rem;
+      }
+      .brand {
+        font-size: .84rem;
+        gap: .45rem;
+        min-width: 0;
+      }
+      .brand span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .brand svg { width: 28px; height: 28px; flex-shrink: 0; }
+      .nav-links {
+        gap: .4rem;
+        padding-top: 0;
+        flex-shrink: 0;
+      }
+      .nav-links a {
+        min-height: 34px;
+        padding: .32rem .75rem;
+        font-size: .75rem;
+        background: var(--white);
+        color: var(--ink);
+        box-shadow: 0 3px 10px rgb(0 0 0 / 22%);
+      }
+      .hero-copy { width: min(100% - 2rem, 560px); margin-top: 6rem; margin-bottom: 5.8rem; }
+      .hero-copy-blur {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.3rem 1.25rem 1.5rem;
+        margin-left: 0;
+        border-radius: 22px;
+        background: rgb(14 24 19 / 48%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
       h1 { font-size: clamp(3.35rem, 13vw, 5.6rem); }
       .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: -2.3rem; }
-      .fact { min-height: 110px; padding: 1.2rem; }
+      .fact { min-height: auto; padding: 1.15rem 1rem; }
+      .fact-note { font-size: .68rem; }
       .fact:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
       .fact:nth-child(4) { border-top: 1px solid var(--line); }
       .intro { margin: 5.5rem auto 4.4rem; }
       .day-heading { grid-template-columns: 1fr; gap: .8rem; }
       .places { grid-template-columns: 1fr; gap: .45rem; }
       .flex-card { grid-template-columns: 1fr; }
-      .route-gallery { gap: .9rem; margin: 2.5rem 0; }
-      .route-photo--rapallo img { aspect-ratio: 4 / 3; }
-      .route-photo--zoagli img { aspect-ratio: 4 / 1; }
-      .route-caption { align-items: flex-start; flex-direction: column; }
+      .route-gallery { gap: 1rem; margin: 2.5rem 0; }
+      .route-gallery + .route-gallery { margin-top: -1rem; }
+      .route-photo img { aspect-ratio: 2.2 / 1; }
+      .route-caption { align-items: flex-start; flex-direction: column; gap: .2rem; padding: .75rem .9rem; }
+      .route-caption-title { font-size: .84rem; }
+      .route-credit { font-size: .68rem; }
       .sunday { margin-inline: -1.25rem; padding: 4rem 1.25rem; }
       .closing { align-items: flex-start; flex-direction: column; margin-block: 3.5rem 4rem; }
     }
 
     @media (max-width: 420px) {
-      .topbar { gap: .6rem; }
-      .brand { gap: .45rem; }
-      .nav-links { gap: .65rem; }
-      .nav-links a { font-size: .72rem; }
+      .topbar {
+        padding: .85rem .75rem 0;
+        gap: .35rem;
+      }
+      .brand { gap: .35rem; }
+      .brand span { font-size: .75rem; max-width: 130px; }
+      .brand svg { width: 26px; height: 26px; }
+      .nav-links { gap: .35rem; }
+      .nav-links a {
+        min-height: 32px;
+        padding: .28rem .65rem;
+        font-size: .72rem;
+        background: var(--white);
+        color: var(--ink);
+      }
       .hero-copy { margin-top: 5rem; }
+      .hero-copy-blur {
+        padding: 1.1rem 1rem 1.25rem;
+        border-radius: 18px;
+      }
       .photo-credit { max-width: 260px; font-size: .61rem; }
-      .fact { padding: 1rem; }
+      .fact { padding: 1rem .85rem; }
       .fact strong { font-size: 1.02rem; }
+      .fact-note { font-size: .66rem; }
       .timeline { padding-left: 1.65rem; }
       .event::before { left: -2.04rem; }
     }
@@ -579,8 +734,7 @@
   <section class="gate-screen" id="password-gate" aria-labelledby="gate-title">
     <div class="gate-art">
       <img class="gate-illustration" src="assets/ingresso-astratto.svg" alt="">
-      <span class="gate-art-label">Una proposta per te</span>
-      <p class="gate-art-copy">Una parola, e si apre una piccola fuga.</p>
+      <span class="gate-art-label">Idea di weekend sport & relax</span>
     </div>
     <div class="gate-side">
       <div class="gate-card">
@@ -590,9 +744,12 @@
           <label class="gate-label" for="gate-password">Password</label>
           <input class="gate-input" id="gate-password" name="password" type="password" placeholder="Il tuo nome" autocomplete="off" spellcheck="false" aria-describedby="gate-error" required>
           <p class="gate-error" id="gate-error" role="alert" hidden>Quasi! Riprova con il nome giusto.</p>
-          <button class="button gate-button" type="submit">Apri la proposta</button>
+          <button class="button gate-button" type="submit">
+            Apri la proposta
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </form>
-        <noscript><p class="gate-noscript">Per aprire la sorpresa, attiva JavaScript nel browser.</p></noscript>
+        <noscript><p class="gate-noscript">Per aprire la proposta, attiva JavaScript nel browser.</p></noscript>
       </div>
     </div>
   </section>
@@ -620,14 +777,15 @@
     </div>
 
     <div class="hero-copy">
-      <p class="eyebrow">Un fine settimana per due</p>
-      <h1>Tra il blu<br><span>e i sentieri.</span></h1>
-      <p class="hero-recipient">Una proposta per Francesca</p>
-      <p class="hero-intro">Una giornata a piedi tra i borghi del Tigullio, poi il lusso di una domenica senza fretta. Il resto lo decide il vostro passo.</p>
-      <a class="button" href="#sabato">
-        Scopri il programma
-        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div class="hero-copy-blur">
+        <p class="eyebrow">Una proposta per Francesca</p>
+        <h1>Tra il blu<br><span>e i sentieri.</span></h1>
+        <p class="hero-intro">Una giornata a piedi tra i borghi del Tigullio, poi il lusso di una domenica senza fretta.</p>
+        <a class="button" href="#sabato">
+          Scopri il programma
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </div>
 
     <p class="photo-credit">Foto: <a href="https://commons.wikimedia.org/wiki/File:Santa_Margherita_Ligure.jpg" target="_blank" rel="noopener noreferrer">Andrzej Otrębski · CC BY-SA 3.0</a>, Wikimedia Commons</p>
@@ -637,14 +795,18 @@
     <section class="facts" aria-label="Dati del trekking">
       <div class="fact"><span class="fact-label">Distanza</span><strong>16–18 km</strong></div>
       <div class="fact"><span class="fact-label">In cammino</span><strong>5–6 ore</strong></div>
-      <div class="fact"><span class="fact-label">Impegno</span><strong>Impegnativo</strong></div>
+      <div class="fact">
+        <span class="fact-label">Impegno</span>
+        <strong>per buoni camminatori</strong>
+        <span class="fact-note">la lunghezza dell’itinerario può essere ridotta a piacimento</span>
+      </div>
       <div class="fact"><span class="fact-label">Terreno</span><strong>Saliscendi costieri</strong></div>
     </section>
 
     <section class="intro" aria-labelledby="intro-title">
       <p class="section-kicker">Il piano del weekend</p>
-      <h2 id="intro-title">Due giorni, un ritmo tutto vostro.</h2>
-      <p>Il sabato si conquista il panorama passo dopo passo. La domenica si lascia spazio al mare, ai caruggi e a un buon pranzo ligure.</p>
+      <h2 id="intro-title">Due giorni, cammino e relax</h2>
+      <p>Il sabato si conquista il panorama passo dopo passo. La domenica si lascia spazio al mare, ai caruggi e a uno spuntino ligure.</p>
     </section>
 
     <section class="day-section" id="sabato" aria-labelledby="sabato-title">
@@ -659,12 +821,11 @@
       <div class="timeline">
         <article class="event">
           <p class="event-time">08:30 · Santa Margherita Ligure</p>
-          <h3>Arrivo e preparativi</h3>
-          <p>Colazione, sistemazione e un momento per preparare lo zaino prima di mettersi in cammino.</p>
+          <h3>Arrivo alla partenza dell'itinerario</h3>
+          <p>Colazione e imbocco del percorso a piedi.</p>
         </article>
 
         <article class="event">
-          <p class="event-time">09:15 · Tappa 5</p>
           <h3>Una costa, tanti scorci</h3>
           <p>Mulattiere, sentieri e brevi tratti asfaltati accompagnano il percorso tra borghi di mare e salite panoramiche.</p>
           <ul class="places">
@@ -674,39 +835,66 @@
             <li><strong>Zoagli</strong> — discesa al borgo: una buona pausa pranzo vista mare.</li>
             <li><strong>San Pietro di Rovereto</strong> — l’ultima salita verso il Santuario delle Grazie.</li>
           </ul>
-          <a class="text-link" href="https://tigulliotrekking.it/tappa-5-cammino-nel-tigullio/" target="_blank" rel="noopener noreferrer">
-            Mappa e dettagli ufficiali
-            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M11 4h5v5m-.5-4.5-7 7M14 11v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
         </article>
 
         <article class="event">
           <p class="event-time">Tardo pomeriggio · Chiavari</p>
           <h3>Traguardo sotto i portici</h3>
-          <p>La tappa si chiude tra i portici storici di Chiavari. Da qui, rientro in treno a Santa Margherita e meritato riposo.</p>
+          <p>La tappa si chiude tra i portici storici di Chiavari. Da qui, rientro in treno in pochi minuti a Santa Margherita e meritato riposo.</p>
         </article>
       </div>
 
       <section class="route-gallery" aria-labelledby="route-gallery-title">
         <div class="route-gallery-heading">
           <p class="section-kicker">Lungo la costa</p>
-          <h3 id="route-gallery-title">Il percorso, in due scorci.</h3>
+          <h3 id="route-gallery-title">I borghi sul mare.</h3>
           <p>Dal Castello di Rapallo al panorama di Zoagli, due tappe da assaporare anche con gli occhi.</p>
         </div>
         <figure class="route-photo route-photo--rapallo">
           <img src="assets/rapallo-castello.jpg" alt="Il Castello di Rapallo affacciato sul mare e sul porto" width="1280" height="848" loading="lazy" decoding="async">
           <figcaption class="route-caption">
             <span class="route-caption-title">Rapallo · il Castello sul mare</span>
-            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Rapallo-castello_sul_mare_(2015).jpg" target="_blank" rel="noopener noreferrer">Dapa19</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · ridimensionata</span>
+            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Rapallo-castello_sul_mare_(2015).jpg" target="_blank" rel="noopener noreferrer">Dapa19</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></span>
           </figcaption>
         </figure>
         <figure class="route-photo route-photo--zoagli">
           <img src="assets/zoagli-panorama.jpg" alt="Veduta panoramica di Zoagli, con il borgo costiero affacciato sul golfo" width="1920" height="274" loading="lazy" decoding="async">
           <figcaption class="route-caption">
             <span class="route-caption-title">Zoagli · il borgo e la costa</span>
-            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Wv_Zoagli_banner.jpg" target="_blank" rel="noopener noreferrer">patano</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a> · ridimensionata</span>
+            <span class="route-credit">Foto <a href="https://commons.wikimedia.org/wiki/File:Wv_Zoagli_banner.jpg" target="_blank" rel="noopener noreferrer">patano</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></span>
           </figcaption>
         </figure>
+      </section>
+
+      <section class="route-gallery route-gallery--details" aria-labelledby="route-details-title">
+        <div class="route-gallery-heading">
+          <p class="section-kicker">Tra cielo e creuze</p>
+          <h3 id="route-details-title">Scorci e sentieri dall’alto.</h3>
+          <p>Le vedute aperte sul golfo, le scalinate in pietra e i passaggi tipici tra mare e collina.</p>
+        </div>
+        <figure class="route-photo route-photo--dallalto">
+          <img src="assets/zoagli-vedute-dallalto.jpg" alt="Vedute panoramiche dall'alto lungo il sentiero sopra Zoagli" width="700" height="320" loading="lazy" decoding="async">
+          <figcaption class="route-caption">
+            <span class="route-caption-title">Zoagli · le vedute dall’alto</span>
+            <span class="route-credit">Scorci panoramici sul golfo</span>
+          </figcaption>
+        </figure>
+        <figure class="route-photo route-photo--passaggi">
+          <img src="assets/zoagli-vedute-e-passaggi.jpg" alt="Creuze liguri, passaggi lastricati e scorci sul mare" width="720" height="300" loading="lazy" decoding="async">
+          <figcaption class="route-caption">
+            <span class="route-caption-title">Lungo il cammino · creuze e passaggi</span>
+            <span class="route-credit">Sentieri tipici tra borgo e mare</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div>
+          <p class="section-kicker">Tutto pronto, senza fretta</p>
+          <h2 id="closing-title">Il passo giusto è il vostro.</h2>
+          <p>Un’idea di weekend da tenere leggera: si parte insieme, e si sceglie strada facendo quanto lontano arrivare.</p>
+        </div>
+        <a class="button" href="#inizio">Torna all’inizio</a>
       </section>
 
       <section class="map-section" aria-labelledby="map-title">
@@ -769,20 +957,7 @@
         </div>
       </div>
     </section>
-
-    <section class="closing" aria-labelledby="closing-title">
-      <div>
-        <p class="section-kicker">Tutto pronto, senza fretta</p>
-        <h2 id="closing-title">Il passo giusto è il vostro.</h2>
-        <p>Un’idea di weekend da tenere leggera: si parte insieme, e si sceglie strada facendo quanto lontano arrivare.</p>
-      </div>
-      <a class="button" href="#inizio">Torna all’inizio</a>
-    </section>
   </main>
-
-  <footer>
-    <p>Un piccolo itinerario per due · Percorso e informazioni trekking: <a href="https://tigulliotrekking.it/tappa-5-cammino-nel-tigullio/" target="_blank" rel="noopener noreferrer">Tigullio Trekking</a>.</p>
-  </footer>
   </div>
   <script>
     (() => {
